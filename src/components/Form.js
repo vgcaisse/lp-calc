@@ -1,28 +1,29 @@
-
 import React from 'react'
+import { useState } from 'react'
+
+const initialFormValues = { name: '', role: '', lp: 0 }
 
 export default function Form(props) {
-    const {
-        values,
-    } = props
+    const [values, setValues] = useState(initialFormValues)
 
     const onChange = evt => {
-        const { value, name } = evt.target;
-        console.log(value)
+        const { id, value } = evt.target;
+        setValues({...values, [id]: value})
+        console.log(values)
     }
 
     const onSubmit = evt => {
         evt.preventDefault();
-        const { name, value } = evt.target;
-        console.log(name)
+        setValues(initialFormValues)
+        console.log(values)
     }
 
     const isDisabled = () => {
-        // if (values !== ) {
-        //     return false
-        // } else {
-        //     return true  
-        // }
+        if (values.name.trim() && values.role.trim() && values.lp ) {
+            return false
+        } else {
+            return true  
+        }
     }
 
     return (
@@ -30,16 +31,15 @@ export default function Form(props) {
             <form className='form'>
                 {/* onChange={onChange} */}
                 <h3>Summoner Name</h3>
-                <label>
                     <input
-                        name='name'
+                        id='name'
                         type='input'
                         placeholder='Summoner Name'
-                        value={values}
+                        value={values.name}
                         onChange={onChange}
                     />
 
-                    <select value={values} name="lp" onChange={onChange}>
+                    <select value={values.role} id="role" onChange={onChange}>
                         <option value="">-- role --</option>
                         <option value='top'>Top</option>
                         <option value='mid'>Mid</option>
@@ -47,21 +47,18 @@ export default function Form(props) {
                         <option value='adc'>ADC</option>
                         <option value='support'>Support</option>
                     </select>
-                </label>
 
-                <label>
                     <h3>Did You Carry?</h3>
                     <input
-                        name='lp'
+                        id='lp'
                         type='input'
                         placeholder='lp that you lost or gained'
-                        value={values}
+                        value={values.lp}
                         onChange={onChange}
                     />
-                </label>
                 <h3></h3>
-                <button className='btn' disabled={isDisabled()} onClick={onSubmit} name='add'>Carried</button>
-                <button className='btn' disabled={isDisabled()} onClick={onSubmit} name='sub'>Cringed On</button>
+                <button className='btn' disabled={isDisabled()} onClick={onSubmit} id='add'>Carried</button>
+                <button className='btn' disabled={isDisabled()} onClick={onSubmit} id='sub'>Cringed On</button>
             </form>
         </div>
     )
