@@ -1,47 +1,68 @@
-import { isDisabled } from '@testing-library/user-event/dist/utils';
+
 import React from 'react'
 
 export default function Form(props) {
     const {
-        value,
+        values,
     } = props
 
     const onChange = evt => {
-        const { value } = evt.target;
+        const { value, name } = evt.target;
         console.log(value)
     }
 
     const onSubmit = evt => {
         evt.preventDefault();
-        const { name } = evt.target;
+        const { name, value } = evt.target;
         console.log(name)
     }
 
-    // isDisabled = () => {
-    //     if (!value) {
-    //         return true
-    //     } else {
-    //         return false
-    //     }
-    // }
+    const isDisabled = () => {
+        // if (values !== ) {
+        //     return false
+        // } else {
+        //     return true  
+        // }
+    }
 
     return (
         <div>
             <form className='form'>
+                {/* onChange={onChange} */}
+                <h3>Summoner Name</h3>
                 <label>
-                    {/* onChange={onChange} */}
-                    <h3>Did You Carry?</h3>
-                    <select value={value} name="lp" onChange={onChange}>
-                        <option value="">-- by how much/little --</option>
-                        <option value='14'>14</option>
-                        <option value='17'>17</option>
-                        <option value='21'>21</option>
+                    <input
+                        name='name'
+                        type='input'
+                        placeholder='Summoner Name'
+                        value={values}
+                        onChange={onChange}
+                    />
+
+                    <select value={values} name="lp" onChange={onChange}>
+                        <option value="">-- role --</option>
+                        <option value='top'>Top</option>
+                        <option value='mid'>Mid</option>
+                        <option value='jungle'>Jungle</option>
+                        <option value='adc'>ADC</option>
+                        <option value='support'>Support</option>
                     </select>
                 </label>
-                <button className='btn' onClick={onSubmit} name='add'>Carry?</button>
-                <button className='btn' onClick={onSubmit} name='sub'>Cringed On?</button>
+
+                <label>
+                    <h3>Did You Carry?</h3>
+                    <input
+                        name='lp'
+                        type='input'
+                        placeholder='lp that you lost or gained'
+                        value={values}
+                        onChange={onChange}
+                    />
+                </label>
+                <h3></h3>
+                <button className='btn' disabled={isDisabled()} onClick={onSubmit} name='add'>Carried</button>
+                <button className='btn' disabled={isDisabled()} onClick={onSubmit} name='sub'>Cringed On</button>
             </form>
         </div>
     )
 }
-
