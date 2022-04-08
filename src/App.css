@@ -21,7 +21,7 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: gold;
 }
 
 .App-link {
@@ -35,4 +35,19 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.lp-calc {
+  display: flex;
+  align-items: center;
+  background-color: green;
+}
+
+.btn:hover {
+  cursor: pointer;
+}
+
+.imgCont {
+  height: 2%;
+  width: 60%;
 }
